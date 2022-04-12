@@ -1,5 +1,5 @@
-FROM ubuntu:xenial
-MAINTAINER Fmstrat <fmstrat@NOSPAM.NO>
+FROM ubuntu:latest
+LABEL MAINTAINER Francesco Zanti <francescoznt@NOSPAM.NO>
 
 ENV DEBIAN_FRONTEND noninteractive
 
