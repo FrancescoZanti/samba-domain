@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-LABEL MAINTAINER Francesco Zanti <francescoznt@NOSPAM.NO>
+LABEL MAINTAINER Francesco Zanti
 
 ENV DEBIAN_FRONTEND noninteractive
 

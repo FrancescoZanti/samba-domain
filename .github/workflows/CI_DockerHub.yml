@@ -38,5 +38,5 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           file: ./Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: francescozanti/samba-domain:${{ env.version }}, francescozanti/samba-domain:server-latest
+          tags: francescozanti/samba-domain:${{ env.version }}, francescozanti/samba-domain:latest
           build-args: francescozanti/samba-domain:${{ env.version }}         
