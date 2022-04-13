@@ -1,0 +1,42 @@
+name: CI_Dockerhub_Ubuntu
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: "Docker Build & Push"
+
+      run: echo "version=$(date +%Y.%m)" >> $GITHUB_ENV
+    
+    - uses: actions/checkout@v2
+    
+    - name: "Setup QEMU"
+      uses: docker/setup-qemu-action@v1
+
+    -   name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+    -   name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    -   name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          file: ./Dockerfile-Ubuntu
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: francescozanti/samba-domain:ubuntu-${{ env.version }}, francescozanti/samba-domain:ubuntu-latest, francescozanti/samba-domain:latest
+          build-args: francescozanti/samba-domain:ubuntu-${{ env.version }}         
